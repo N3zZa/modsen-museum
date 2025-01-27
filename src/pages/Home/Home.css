@@ -1,0 +1,15 @@
+.Home h1{
+    font-family: Lexend Deca;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 80px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color:#393939;
+}
+
+.Home span {
+    color: #E0A449;
+    font-weight: bold;
+}
