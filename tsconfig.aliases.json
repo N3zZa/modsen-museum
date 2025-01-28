@@ -1,11 +1,8 @@
 {
- "compilerOptions": {
- "baseUrl": ".",
- "paths": {
-    "@api/*": ["src/api/*"],
-    "@assets/*": ["src/assets/*"],
-    "@components/*": ["src/components/*"],
-    "@contexts/*": ["src/contexts/*"],
+  "compilerOptions": {
+    "baseUrl": "src",  // Указывает корневую директорию
+    "paths": {
+      "@components/*": ["components/*"],  // Алиас для компонентов
     }
   }
 }
