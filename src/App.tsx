@@ -8,11 +8,13 @@ function App() {
   return (
     <Router>
       <Header/>
-      <Routes>
+     <div className='wrapper'>
+       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/card/:cardId" element={''} />
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
+     </div>
       <Footer />
     </Router>
   );

@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const StyledFooter = styled.footer`
-    margin-top:auto;
     width: 100%;
     height: 127px;
     display: flex;
@@ -11,7 +10,7 @@ export const StyledFooter = styled.footer`
 export const StyledFooterInner = styled.div`
     max-width:1280px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 2rem;
     width: 100%;
     height: 127px;
     display: flex;

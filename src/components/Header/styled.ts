@@ -11,7 +11,7 @@ export const StyledHeader = styled.header`
 export const StyledHeaderInner = styled.div`
     max-width:1280px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 2rem;
     width: 100%;
     height: 127px;
     display: flex;
@@ -19,7 +19,7 @@ export const StyledHeaderInner = styled.div`
     justify-content: space-between;
     color:white;
 
-    div:last-of-type {
+    a {
         display: flex;
         align-items: center;
         gap: 0.25rem;
