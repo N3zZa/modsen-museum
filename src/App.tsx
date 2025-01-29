@@ -7,14 +7,14 @@ import Header from './components/Header/Header';
 function App() {
   return (
     <Router>
-      <Header/>
-     <div className='wrapper'>
-       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/card/:cardId" element={''} />
-        <Route path="/favorites" element={<Favorites />} />
-      </Routes>
-     </div>
+      <Header />
+      <div className="wrapper">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/card/:cardId" element={''} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Routes>
+      </div>
       <Footer />
     </Router>
   );

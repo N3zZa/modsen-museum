@@ -18,3 +18,10 @@
     color: #E0A449;
     font-weight: bold;
 }
+
+@media (max-width: 600px) {
+    .Home h1 {
+        font-size: 48px;
+        line-height: 60px;
+    }
+}
