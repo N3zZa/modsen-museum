@@ -1,11 +1,24 @@
 import logoImg from '../../assets/logo.svg';
 import bookmarkImg from '../../assets/bookmark.svg';
-import { StyledHeader, StyledHeaderInner, Logo } from './styled';
-import { Link, NavLink } from 'react-router-dom';
+import homeImg from '../../assets/home.svg';
+import burgerImg from '../../assets/burger.svg';
+import { StyledHeader, StyledHeaderInner, Logo, BurgerMenu } from './styled';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-type Props = {};
+const Header = () => {
+  const location = useLocation();
+  const [burgerMenu, openBurgerMenu] = useState<boolean>(false);
+  const screenWidth = window.screen.width;
 
-const Header = (props: Props) => {
+  useEffect(() => {
+      if (burgerMenu) {
+        document.body.style.overflow = "hidden"
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+  }, [burgerMenu])
+
   return (
     <StyledHeader>
       <StyledHeaderInner>
@@ -17,10 +30,41 @@ const Header = (props: Props) => {
             </p>
           </Logo>
         </NavLink>
-        <NavLink to="/favorites">
-          <img src={bookmarkImg} alt="bookmark" />
-          <p>Your favorites</p>
-        </NavLink>
+
+        {screenWidth > 600 ? (
+          <nav style={{ display: 'flex', gap: '1rem' }}>
+            {location.pathname !== '/' && (
+              <NavLink to="/favorites">
+                <img src={homeImg} alt="home" />
+                <p>Home</p>
+              </NavLink>
+            )}
+            <NavLink to="/favorites">
+              <img src={bookmarkImg} alt="bookmark" />
+              <p>Your favorites</p>
+            </NavLink>
+          </nav>
+        ) : (
+          <>
+            <button onClick={() => openBurgerMenu(!burgerMenu)}>
+              <img width={30} src={burgerImg} alt="menu" />
+            </button>
+            {burgerMenu && (
+              <BurgerMenu>
+                {location.pathname !== '/' && (
+                  <NavLink to="/favorites">
+                    <img src={homeImg} alt="home" />
+                    <p>Home</p>
+                  </NavLink>
+                )}
+                <NavLink to="/favorites">
+                  <img src={bookmarkImg} alt="bookmark" />
+                  <p>Your favorites</p>
+                </NavLink>
+              </BurgerMenu>
+            )}
+          </>
+        )}
       </StyledHeaderInner>
     </StyledHeader>
   );

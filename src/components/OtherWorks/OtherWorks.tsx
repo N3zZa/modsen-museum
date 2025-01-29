@@ -6,7 +6,8 @@ import MiniCard from '../MiniCard/MiniCard';
 type artData = {
   title: string;
   artist: string;
-  image_url: string;
+  image_url: string | null;
+  image_urlMin: string | null;
   id: number;
 };
 
@@ -15,16 +16,17 @@ const OtherWorks = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
-  const { totalPages } = usePagination();
 
   const fetchArtworks = async () => {
     try {
       setError(false);
       setLoading(true);
 
-      const randomPage = Math.floor(Math.random() * totalPages) + 1;
+      const randomPage = Math.floor(Math.random() * 500) + 1;
 
-      fetch(`https://api.artic.edu/api/v1/artworks?page=${randomPage}&limit=9`)
+      fetch(
+        `https://api.artic.edu/api/v1/artworks?page=${randomPage}&limit=9&fields=id,title,artist_display,image_id&is_public_domain=true`
+      )
         .then((response) => response.json())
         .then((respData) => {
           const data = respData.data;
@@ -33,7 +35,12 @@ const OtherWorks = () => {
             id: artwork.id,
             title: artwork.title,
             artist: artwork.artist_display || 'Unknown',
-            image_url: `https://www.artic.edu/iiif/2/${artwork.image_id}/full/80,80/0/default.jpg`,
+            image_urlMin: !!artwork.image_id
+              ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/80,80/0/default.jpg`
+              : null,
+            image_url: !!artwork.image_id
+              ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`
+              : null,
           }));
 
           setArtworks(artworksWithImages);
@@ -73,9 +80,11 @@ const OtherWorks = () => {
               {artworks?.map((art) => (
                 <MiniCard
                   key={art.id}
+                  id={art.id}
                   title={art.title}
                   artist={art.artist}
                   image_url={art.image_url}
+                  image_urlMin={art.image_urlMin}
                 />
               ))}
             </>
