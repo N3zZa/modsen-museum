@@ -14,6 +14,7 @@ export const StyledHeader = styled.header`
   align-items: center;
 `;
 export const StyledHeaderInner = styled.div`
+  position:relative;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
@@ -33,6 +34,10 @@ export const StyledHeaderInner = styled.div`
   p {
     font-size: 18px;
   }
+  button {
+    background:none;
+    border:none;
+  }
 `;
 
 export const Logo = styled.div`
@@ -48,4 +53,17 @@ export const Logo = styled.div`
     color: #e0a449;
     font-weight: bold;
   }
+`;
+export const BurgerMenu = styled.nav`
+  display: flex;
+  flex-direction:column;
+  position:absolute;
+  right:2rem;
+  top:5rem;
+  gap:0.25rem;
+  background: #343333;
+  border: 1px solid rgb(67, 67, 67);
+  padding:0 1rem;
+  
+  z-index:1;
 `;

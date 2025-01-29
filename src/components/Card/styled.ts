@@ -3,10 +3,9 @@ import styled from 'styled-components';
 export const CardBlock = styled.div`
   display: flex;
   position: relative;
-  max-width: 387px;
-  width: 100%;
   height: 514px;
   padding: 1rem 0;
+  cursor:pointer;
 `;
 export const CardImage = styled.div`
   position: absolute;
@@ -59,4 +58,7 @@ export const FavoriteButton = styled.button`
   cursor: pointer;
   width: 59px;
   height: 59px;
+   &:hover svg{
+    fill: #E0A449;
+  }
 `;

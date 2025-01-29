@@ -6,6 +6,11 @@ export const StyledFooter = styled.footer`
   display: flex;
   align-items: center;
   background: white;
+  position:absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
 `;
 export const StyledFooterInner = styled.div`
   max-width: 1280px;

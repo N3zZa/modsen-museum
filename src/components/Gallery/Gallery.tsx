@@ -13,7 +13,7 @@ import { usePagination } from '../../context/PaginationContext';
 type artData = {
   title: string;
   artist: string;
-  image_url: string;
+  image_url: string | null;
   id: number;
 };
 
@@ -23,8 +23,8 @@ const Gallery = () => {
   const [artworks, setArtworks] = useState<Record<number, artData[]>>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const { currentPage, setCurrentPage, setTotalPages } = usePagination();
 
   const fetchArtworks = async (page: number) => {
     try {
@@ -35,18 +35,21 @@ const Gallery = () => {
 
       setError(false);
       setLoading(true);
-      fetch(`https://api.artic.edu/api/v1/artworks?page=${page}&limit=3`)
+      fetch(
+        `https://api.artic.edu/api/v1/artworks?page=${page}&limit=3&fields=id,title,artist_display,image_id&is_public_domain=true`
+      )
         .then((response) => response.json())
         .then((respData) => {
           const data = respData.data;
 
-          setTotalPages(respData.pagination.total_pages);
-
+          /* setTotalPages(respData.pagination.total_pages); */
           const artworksWithImages = data.map((artwork: any) => ({
             id: artwork.id,
             title: artwork.title,
             artist: artwork.artist_display || 'Unknown',
-            image_url: `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`,
+            image_url: !!artwork.image_id
+              ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`
+              : null,
           }));
 
           setArtworks((prev) => ({ ...prev, [page]: artworksWithImages }));
@@ -91,6 +94,7 @@ const Gallery = () => {
             {artworks[currentPage]?.map((art) => (
               <Card
                 key={art.id}
+                id={art.id}
                 title={art.title}
                 artist={art.artist}
                 image_url={art.image_url}
