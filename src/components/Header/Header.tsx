@@ -34,7 +34,7 @@ const Header = () => {
         {screenWidth > 600 ? (
           <nav style={{ display: 'flex', gap: '1rem' }}>
             {location.pathname !== '/' && (
-              <NavLink to="/favorites">
+              <NavLink to="/">
                 <img src={homeImg} alt="home" />
                 <p>Home</p>
               </NavLink>
@@ -52,7 +52,7 @@ const Header = () => {
             {burgerMenu && (
               <BurgerMenu>
                 {location.pathname !== '/' && (
-                  <NavLink to="/favorites">
+                  <NavLink to="/">
                     <img src={homeImg} alt="home" />
                     <p>Home</p>
                   </NavLink>
