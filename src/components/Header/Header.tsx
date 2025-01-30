@@ -12,24 +12,22 @@ const Header = () => {
   const screenWidth = window.screen.width;
 
   useEffect(() => {
-      if (burgerMenu) {
-        document.body.style.overflow = "hidden"
-      } else {
-        document.body.style.overflow = 'auto';
-      }
-  }, [burgerMenu])
+    if (burgerMenu) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [burgerMenu]);
 
   return (
     <StyledHeader>
       <StyledHeaderInner>
-        <NavLink to="/">
           <Logo>
             <img src={logoImg} alt="logo" />
             <p>
               Museum of <span>Art</span>
             </p>
           </Logo>
-        </NavLink>
 
         {screenWidth > 600 ? (
           <nav style={{ display: 'flex', gap: '1rem' }}>
@@ -52,12 +50,12 @@ const Header = () => {
             {burgerMenu && (
               <BurgerMenu>
                 {location.pathname !== '/' && (
-                  <NavLink to="/">
+                  <NavLink onClick={() => openBurgerMenu(false)} to="/">
                     <img src={homeImg} alt="home" />
                     <p>Home</p>
                   </NavLink>
                 )}
-                <NavLink to="/favorites">
+                <NavLink onClick={() => openBurgerMenu(false)} to="/favorites">
                   <img src={bookmarkImg} alt="bookmark" />
                   <p>Your favorites</p>
                 </NavLink>

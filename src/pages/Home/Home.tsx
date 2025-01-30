@@ -3,13 +3,11 @@ import './Home.css';
 import Input from './../../components/Input/Input';
 import Gallery from '../../components/Gallery/Gallery';
 import OtherWorks from '../../components/OtherWorks/OtherWorks';
-import { PaginationProvider } from '../../context/PaginationContext';
 
 type Props = {};
 
 const Home = (props: Props) => {
   return (
-    <PaginationProvider>
       <div className="Home">
         <h1>
           let's find some <span>Art</span> here!
@@ -18,7 +16,6 @@ const Home = (props: Props) => {
         <Gallery />
         <OtherWorks />
       </div>
-    </PaginationProvider>
   );
 };
 

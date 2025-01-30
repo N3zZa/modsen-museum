@@ -9,6 +9,8 @@ import {
 } from './styled';
 import logoImg from '../../assets/logo.svg';
 import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { FavoritesContext } from '../../context/FavoritesContext';
 
 type MiniCardProps = {
   title: string;
@@ -16,21 +18,48 @@ type MiniCardProps = {
   image_url: string | null;
   image_urlMin: string | null;
   id: number;
+  artist_display: string;
+  credit_line: string;
+  date_display: string;
+  dimensions: string;
+  place_of_origin: string;
 };
 
 const truncateText = (str: string, len: number) => {
   return str.slice(0, len) + '...';
 };
 
-const MiniCard = ({ title, artist, image_url,image_urlMin, id }: MiniCardProps) => {
+const MiniCard = ({
+  title,
+  artist,
+  image_url,
+  image_urlMin,
+  id,
+  ...props
+}: MiniCardProps) => {
+  const context = useContext(FavoritesContext);
+
+  if (!context) {
+    throw new Error('FavoritesContext используется вне FavoritesProvider');
+  }
+
+  const { toggleFavorite, isFavorite } = context;
+  const artWork = { title, artist, image_url, image_urlMin, id, ...props };
+
+  const onClickFavoriteBtn = (event: React.MouseEvent) => {
+    event.preventDefault();
+    toggleFavorite(artWork);
+  };
   return (
-    <NavLink to={`/card/${id}`} state={{ title, artist, image_url, id }}>
+    <NavLink
+      to={`/card/${id}`}
+      state={{ title, artist, image_url,image_urlMin, id, ...props }}>
       <MiniCardBlock>
         <MiniCardInner>
           <MiniCardInfo>
             <MiniCardImage
               style={{
-                background: `url(${!!image_urlMin ? image_urlMin : logoImg})`,
+                background: `url(${image_urlMin || logoImg})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: `${!!image_urlMin ? 'cover' : '50px'}`,
                 backgroundPosition: 'center',
@@ -42,12 +71,12 @@ const MiniCard = ({ title, artist, image_url,image_urlMin, id }: MiniCardProps) 
               <p>Public</p>
             </MiniCardInfoInner>
           </MiniCardInfo>
-          <FavoriteButton>
+          <FavoriteButton onClick={(e) => onClickFavoriteBtn(e)}>
             <svg
               width="24"
               height="25"
               viewBox="0 0 24 25"
-              fill="none"
+              fill={`${isFavorite(id) ? '#E0A449' : 'none'}`}
               xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M19.5 21.5L12.375 17.5L5.25 21.5V5.5C5.25 4.96957 5.46448 4.46086 5.84625 4.08579C6.22802 3.71071 6.74581 3.5 7.28571 3.5H17.4643C18.0042 3.5 18.522 3.71071 18.9038 4.08579C19.2855 4.46086 19.5 4.96957 19.5 5.5V21.5Z"
