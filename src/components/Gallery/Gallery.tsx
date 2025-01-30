@@ -8,23 +8,16 @@ import {
   PageButton,
 } from './styled';
 import arrowImg from '../../assets/arrow.svg';
-import { usePagination } from '../../context/PaginationContext';
+import { Artwork } from '../../constants/models/artModel';
 
-type artData = {
-  title: string;
-  artist: string;
-  image_url: string | null;
-  id: number;
-};
 
 const pageCount = [1, 2, 3, 4];
 
 const Gallery = () => {
-  const [artworks, setArtworks] = useState<Record<number, artData[]>>([]);
+  const [artworks, setArtworks] = useState<Record<number, Artwork[]>>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
 
   const fetchArtworks = async (page: number) => {
     try {
@@ -36,13 +29,11 @@ const Gallery = () => {
       setError(false);
       setLoading(true);
       fetch(
-        `https://api.artic.edu/api/v1/artworks?page=${page}&limit=3&fields=id,title,artist_display,image_id&is_public_domain=true`
+        `https://api.artic.edu/api/v1/artworks?page=${page}&limit=3&fields=id,title,artist_display,image_id,date_display,artist_display,credit_line,dimensions,place_of_origin&is_public_domain=true`
       )
         .then((response) => response.json())
         .then((respData) => {
           const data = respData.data;
-
-          /* setTotalPages(respData.pagination.total_pages); */
           const artworksWithImages = data.map((artwork: any) => ({
             id: artwork.id,
             title: artwork.title,
@@ -50,6 +41,14 @@ const Gallery = () => {
             image_url: !!artwork.image_id
               ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`
               : null,
+            image_urlMin: !!artwork.image_id
+              ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/80,80/0/default.jpg`
+              : null,
+            artist_display: artwork.artist_display,
+            credit_line: artwork.credit_line,
+            date_display: artwork.date_display,
+            dimensions: artwork.dimensions,
+            place_of_origin: artwork.place_of_origin,
           }));
 
           setArtworks((prev) => ({ ...prev, [page]: artworksWithImages }));
@@ -98,6 +97,12 @@ const Gallery = () => {
                 title={art.title}
                 artist={art.artist}
                 image_url={art.image_url}
+                image_urlMin={art.image_urlMin}
+                artist_display={art.artist_display}
+                credit_line={art.credit_line}
+                date_display={art.date_display}
+                dimensions={art.dimensions}
+                place_of_origin={art.place_of_origin}
               />
             ))}
           </>

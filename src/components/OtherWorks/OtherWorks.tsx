@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { WorksTitle, Works, Loader } from './styled';
-import { usePagination } from '../../context/PaginationContext';
 import MiniCard from '../MiniCard/MiniCard';
-
-type artData = {
-  title: string;
-  artist: string;
-  image_url: string | null;
-  image_urlMin: string | null;
-  id: number;
-};
+import { Artwork } from '../../constants/models/artModel';
 
 const OtherWorks = () => {
-  const [artworks, setArtworks] = useState<artData[]>([]);
+  const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-
 
   const fetchArtworks = async () => {
     try {
@@ -25,7 +16,7 @@ const OtherWorks = () => {
       const randomPage = Math.floor(Math.random() * 500) + 1;
 
       fetch(
-        `https://api.artic.edu/api/v1/artworks?page=${randomPage}&limit=9&fields=id,title,artist_display,image_id&is_public_domain=true`
+        `https://api.artic.edu/api/v1/artworks?page=${randomPage}&limit=9&fields=id,title,artist_display,image_id,date_display,artist_display,credit_line,dimensions,place_of_origin&is_public_domain=true`
       )
         .then((response) => response.json())
         .then((respData) => {
@@ -41,6 +32,11 @@ const OtherWorks = () => {
             image_url: !!artwork.image_id
               ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`
               : null,
+            artist_display: artwork.artist_display,
+            credit_line: artwork.credit_line,
+            date_display: artwork.date_display,
+            dimensions: artwork.dimensions,
+            place_of_origin: artwork.place_of_origin,
           }));
 
           setArtworks(artworksWithImages);
@@ -52,7 +48,7 @@ const OtherWorks = () => {
         .finally(() => {
           setTimeout(() => {
             setLoading(false);
-          }, 1000);
+          }, 3500);
         });
     } catch (error) {
       setError(true);
@@ -85,6 +81,11 @@ const OtherWorks = () => {
                   artist={art.artist}
                   image_url={art.image_url}
                   image_urlMin={art.image_urlMin}
+                  artist_display={art.artist_display}
+                  credit_line={art.credit_line}
+                  date_display={art.date_display}
+                  dimensions={art.dimensions}
+                  place_of_origin={art.place_of_origin}
                 />
               ))}
             </>

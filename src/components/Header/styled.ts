@@ -63,7 +63,7 @@ export const BurgerMenu = styled.nav`
   gap:0.25rem;
   background: #343333;
   border: 1px solid rgb(67, 67, 67);
+  border-radius: 10px;
   padding:0 1rem;
-  
   z-index:1;
 `;
