@@ -36,11 +36,11 @@ const Card = ({ title, artist, image_url, id, ...props }: CardProps) => {
 
   const { toggleFavorite, isFavorite } = context;
   const artWork = { title, artist, image_url, id, ...props };
-  
-   const onClickFavoriteBtn = (event: React.MouseEvent) => {
-     event.preventDefault();
-     toggleFavorite(artWork);
-   };
+
+  const onClickFavoriteBtn = (event: React.MouseEvent) => {
+    event.preventDefault();
+    toggleFavorite(artWork);
+  };
 
   return (
     <CardBlock>
@@ -55,6 +55,8 @@ const Card = ({ title, artist, image_url, id, ...props }: CardProps) => {
           ...props,
         }}>
         <CardImage
+          loading={'lazy'}
+          src={!!image_url ? image_url : ''}
           style={{
             background: `url(${!!image_url ? image_url : logoImg})`,
             backgroundRepeat: 'no-repeat',

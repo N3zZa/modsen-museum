@@ -40,6 +40,13 @@ export const Loader = styled.div`
   align-items: center;
   justify-content: center;
   height: 546px;
+  width: 100%;
+  h2 {
+    position: absolute;
+    right: calc(50% - 59px);
+    left: calc(50% - 59px);
+    width: fit-content;
+  }
   @media (max-width: 1024px) {
     height: 200px;
   }

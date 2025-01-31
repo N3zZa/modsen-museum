@@ -22,12 +22,12 @@ const Header = () => {
   return (
     <StyledHeader>
       <StyledHeaderInner>
-          <Logo>
-            <img src={logoImg} alt="logo" />
-            <p>
-              Museum of <span>Art</span>
-            </p>
-          </Logo>
+        <Logo>
+          <img src={logoImg} alt="logo" />
+          <p>
+            Museum of <span>Art</span>
+          </p>
+        </Logo>
 
         {screenWidth > 600 ? (
           <nav style={{ display: 'flex', gap: '1rem' }}>

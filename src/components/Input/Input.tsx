@@ -1,24 +1,35 @@
 import { useState } from 'react';
 import { InputStyled, InputBlock, SearchImg, InputInner } from './styled';
 import searchImg from '../../assets/search.svg';
+import { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import { SearchFormValues } from '../Search/Search';
 
-type Props = {
+type InputSearchProps = {
   placeholder: string;
+  register: UseFormRegister<SearchFormValues>;
+  handleSubmit: UseFormHandleSubmit<SearchFormValues>;
+  onSubmit: (data: SearchFormValues) => void;
 };
 
-const Input = ({ ...props }: Props) => {
-  const [inputValue, setInputValue] = useState('');
-
+const Input = ({
+  handleSubmit,
+  onSubmit,
+  register,
+  placeholder,
+}: InputSearchProps) => {
   return (
     <InputBlock>
       <InputInner>
         <InputStyled
           type="text"
-          {...props}
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          placeholder={placeholder}
+          {...register('query')}
         />
-        <SearchImg src={searchImg} alt="search" />
+        <SearchImg
+          onClick={handleSubmit(onSubmit)}
+          src={searchImg}
+          alt="search"
+        />
       </InputInner>
     </InputBlock>
   );

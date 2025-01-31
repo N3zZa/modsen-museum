@@ -1,7 +1,6 @@
 import './Favorites.css';
 import FavoritesList from '../../components/FavoritesList/FavoritesList';
 
-
 const Favorites = () => {
   return (
     <div className="FavoritePage">

@@ -6,7 +6,7 @@ export const StyledFooter = styled.footer`
   display: flex;
   align-items: center;
   background: white;
-  position:absolute;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;

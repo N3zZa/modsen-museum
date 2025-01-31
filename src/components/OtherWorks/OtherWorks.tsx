@@ -16,7 +16,7 @@ const OtherWorks = () => {
       const randomPage = Math.floor(Math.random() * 500) + 1;
 
       fetch(
-        `https://api.artic.edu/api/v1/artworks?page=${randomPage}&limit=9&fields=id,title,artist_display,image_id,date_display,artist_display,credit_line,dimensions,place_of_origin&is_public_domain=true`
+        `https://api.artic.edu/api/v1/artworks?page=${randomPage}&limit=9&fields=id,title,artist_title,image_id,date_display,artist_display,credit_line,dimensions,place_of_origin&is_public_domain=true`
       )
         .then((response) => response.json())
         .then((respData) => {
@@ -25,7 +25,7 @@ const OtherWorks = () => {
           const artworksWithImages = data.map((artwork: any) => ({
             id: artwork.id,
             title: artwork.title,
-            artist: artwork.artist_display || 'Unknown',
+            artist: artwork.artist_title || 'Unknown',
             image_urlMin: !!artwork.image_id
               ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/80,80/0/default.jpg`
               : null,
@@ -48,7 +48,7 @@ const OtherWorks = () => {
         .finally(() => {
           setTimeout(() => {
             setLoading(false);
-          }, 3500);
+          }, 2000);
         });
     } catch (error) {
       setError(true);

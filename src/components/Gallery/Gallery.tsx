@@ -10,7 +10,6 @@ import {
 import arrowImg from '../../assets/arrow.svg';
 import { Artwork } from '../../constants/models/artModel';
 
-
 const pageCount = [1, 2, 3, 4];
 
 const Gallery = () => {
@@ -29,7 +28,7 @@ const Gallery = () => {
       setError(false);
       setLoading(true);
       fetch(
-        `https://api.artic.edu/api/v1/artworks?page=${page}&limit=3&fields=id,title,artist_display,image_id,date_display,artist_display,credit_line,dimensions,place_of_origin&is_public_domain=true`
+        `https://api.artic.edu/api/v1/artworks?page=${page}&limit=3&fields=id,title,artist_title,image_id,date_display,artist_display,credit_line,dimensions,place_of_origin`
       )
         .then((response) => response.json())
         .then((respData) => {
@@ -37,7 +36,7 @@ const Gallery = () => {
           const artworksWithImages = data.map((artwork: any) => ({
             id: artwork.id,
             title: artwork.title,
-            artist: artwork.artist_display || 'Unknown',
+            artist: artwork.artist_title || 'Unknown',
             image_url: !!artwork.image_id
               ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`
               : null,
@@ -117,6 +116,7 @@ const Gallery = () => {
         />
         {pageCount.map((num: number) => (
           <PageButton
+            onClick={() => handlePageChange(num)}
             key={num}
             className={currentPage === num ? 'activePage' : ''}>
             {num}
