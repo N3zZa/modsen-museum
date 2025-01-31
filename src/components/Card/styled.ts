@@ -5,9 +5,9 @@ export const CardBlock = styled.div`
   position: relative;
   height: 514px;
   padding: 1rem 0;
-  cursor:pointer;
+  cursor: pointer;
   width: 100%;
-  max-width: 387px; 
+  max-width: 387px;
   a {
     position: absolute;
     top: 0;
@@ -18,7 +18,7 @@ export const CardBlock = styled.div`
     max-height: 444px;
   }
 `;
-export const CardImage = styled.div`
+export const CardImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;
@@ -69,8 +69,8 @@ export const FavoriteButton = styled.button`
   cursor: pointer;
   width: 59px;
   height: 59px;
-  z-index:2;
-   &:hover svg{
-    fill: #E0A449;
+  z-index: 2;
+  &:hover svg {
+    fill: #e0a449;
   }
 `;

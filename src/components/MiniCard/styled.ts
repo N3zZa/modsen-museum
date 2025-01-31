@@ -5,7 +5,7 @@ export const MiniCardBlock = styled.div`
   background: #ffffff;
   border: 1px solid #f0f1f1;
   max-height: 80px;
-  cursor:pointer;
+  cursor: pointer;
 
   @media (max-width: 500px) {
     max-width: 380px;
@@ -16,7 +16,7 @@ export const MiniCardInner = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-export const MiniCardImage = styled.div`
+export const MiniCardImage = styled.img`
   width: 80px;
   height: 80px;
 `;
@@ -64,7 +64,7 @@ export const FavoriteButton = styled.button`
   cursor: pointer;
   width: 59px;
   height: 59px;
-  &:hover svg{
-    fill: #E0A449;
+  &:hover svg {
+    fill: #e0a449;
   }
 `;

@@ -51,6 +51,7 @@ export const PageButton = styled.button`
   width: 30px;
   height: 30px;
   border-radius: 4px;
+  cursor: pointer;
 
   text-align: center;
   font-family: Lexend Deca;
@@ -58,6 +59,13 @@ export const PageButton = styled.button`
   font-weight: 300;
   line-height: 24px;
   color: #393939;
+
+  &:hover {
+    background: #f17900;
+    font-weight: 600;
+    line-height: 23px;
+    color: #fff;
+  }
 
   &.activePage {
     background: #f17900;

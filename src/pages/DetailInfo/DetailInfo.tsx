@@ -4,7 +4,6 @@ import './DetailInfo.css';
 import logoImg from '../../assets/logo.svg';
 import { FavoritesContext } from '../../context/FavoritesContext';
 
-
 const DetailInfo = () => {
   const {
     id,
@@ -20,31 +19,30 @@ const DetailInfo = () => {
   } = useLocation().state;
   const [loading, setLoading] = useState<boolean>(true);
 
-   const context = useContext(FavoritesContext);
+  const context = useContext(FavoritesContext);
 
-   if (!context) {
-     throw new Error('FavoritesContext используется вне FavoritesProvider');
-   }
+  if (!context) {
+    throw new Error('FavoritesContext используется вне FavoritesProvider');
+  }
 
-   const { toggleFavorite, isFavorite } = context;
-   const artWork = {
-     id,
-     title,
-     image_url,
-     image_urlMin,
-     artist,
-     artist_display,
-     credit_line,
-     date_display,
-     dimensions,
-     place_of_origin,
-   };
+  const { toggleFavorite, isFavorite } = context;
+  const artWork = {
+    id,
+    title,
+    image_url,
+    image_urlMin,
+    artist,
+    artist_display,
+    credit_line,
+    date_display,
+    dimensions,
+    place_of_origin,
+  };
 
-   const onClickFavoriteBtn = (event: React.MouseEvent) => {
-     event.preventDefault();
-     toggleFavorite(artWork);
-   };
-
+  const onClickFavoriteBtn = (event: React.MouseEvent) => {
+    event.preventDefault();
+    toggleFavorite(artWork);
+  };
 
   const extractNationality = (input: string): string | null => {
     const match = input.match(/\(([^,]+),|\n([^,]+)/);
@@ -54,9 +52,7 @@ const DetailInfo = () => {
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 800);
-  }, []); 
-
- 
+  }, []);
 
   return (
     <>

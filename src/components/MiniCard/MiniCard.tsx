@@ -50,16 +50,19 @@ const MiniCard = ({
     event.preventDefault();
     toggleFavorite(artWork);
   };
+
   return (
     <NavLink
       to={`/card/${id}`}
-      state={{ title, artist, image_url,image_urlMin, id, ...props }}>
+      state={{ title, artist, image_url, image_urlMin, id, ...props }}>
       <MiniCardBlock>
         <MiniCardInner>
           <MiniCardInfo>
             <MiniCardImage
+              loading={'lazy'}
+              src={!!image_urlMin ? image_urlMin : undefined}
               style={{
-                background: `url(${image_urlMin || logoImg})`,
+                background: `url(${!!image_urlMin ? image_url : logoImg})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: `${!!image_urlMin ? 'cover' : '50px'}`,
                 backgroundPosition: 'center',

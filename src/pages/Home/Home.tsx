@@ -1,21 +1,25 @@
-import React from 'react';
 import './Home.css';
-import Input from './../../components/Input/Input';
 import Gallery from '../../components/Gallery/Gallery';
 import OtherWorks from '../../components/OtherWorks/OtherWorks';
+import Search from '../../components/Search/Search';
+import { Select } from '../../components/Select/Select';
+import { useState } from 'react';
 
-type Props = {};
+type Option = {
+  label: string;
+  value: string | number;
+};
 
-const Home = (props: Props) => {
+const Home = () => {
   return (
-      <div className="Home">
-        <h1>
-          let's find some <span>Art</span> here!
-        </h1>
-        <Input placeholder="Search Art, Artist, Work..." />
-        <Gallery />
-        <OtherWorks />
-      </div>
+    <div className="Home">
+      <h1>
+        let's find some <span>Art</span> here!
+      </h1>
+      <Search />
+      <Gallery />
+      <OtherWorks />
+    </div>
   );
 };
 

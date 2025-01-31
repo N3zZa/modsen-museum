@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
 import { Artwork } from '../constants/models/artModel';
 
 interface FavoritesContextType {
@@ -13,13 +19,13 @@ export const FavoritesContext = createContext<FavoritesContextType | undefined>(
 
 const FAVORITES_KEY = 'favoriteArtworks';
 
-export const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const FavoritesProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [favorites, setFavorites] = useState<Artwork[]>(() => {
     const storedFavorites = localStorage.getItem(FAVORITES_KEY);
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
-
-  
 
   useEffect(() => {
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
@@ -33,10 +39,10 @@ export const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children 
     );
   };
 
-  const isFavorite = (artId:number) => {
+  const isFavorite = (artId: number) => {
     if (favorites.find((artwork) => artwork.id === artId)) return true;
-    return false
-  }
+    return false;
+  };
 
   return (
     <FavoritesContext.Provider
