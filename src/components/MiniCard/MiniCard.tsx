@@ -1,4 +1,3 @@
-import favoriteImg from '../../assets/bookmark.svg';
 import {
   FavoriteButton,
   MiniCardBlock,
@@ -7,10 +6,10 @@ import {
   MiniCardInfoInner,
   MiniCardInner,
 } from './styled';
-import logoImg from '../../assets/logo.svg';
-import { NavLink } from 'react-router-dom';
+import logoImg from 'assets/logo.svg';
+import { NavLink } from 'react-router';
 import { useContext } from 'react';
-import { FavoritesContext } from '../../context/FavoritesContext';
+import { FavoritesContext } from 'context/FavoritesContext';
 
 type MiniCardProps = {
   title: string;
@@ -46,13 +45,14 @@ const MiniCard = ({
   const { toggleFavorite, isFavorite } = context;
   const artWork = { title, artist, image_url, image_urlMin, id, ...props };
 
-  const onClickFavoriteBtn = (event: React.MouseEvent) => {
+  const onClickFavoriteBtn = (event: any) => {
     event.preventDefault();
     toggleFavorite(artWork);
   };
 
   return (
     <NavLink
+      role="minicard"
       to={`/card/${id}`}
       state={{ title, artist, image_url, image_urlMin, id, ...props }}>
       <MiniCardBlock>

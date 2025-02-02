@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { WorksTitle, Works, Loader } from './styled';
-import MiniCard from '../MiniCard/MiniCard';
-import { Artwork } from '../../constants/models/artModel';
+import MiniCard from 'components/MiniCard/MiniCard';
+import { Artwork } from 'constants/models/artModel';
 
 const OtherWorks = () => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);

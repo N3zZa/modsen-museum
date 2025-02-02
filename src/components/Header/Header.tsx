@@ -1,9 +1,9 @@
-import logoImg from '../../assets/logo.svg';
-import bookmarkImg from '../../assets/bookmark.svg';
-import homeImg from '../../assets/home.svg';
-import burgerImg from '../../assets/burger.svg';
+import logoImg from 'assets/logo.svg';
+import bookmarkImg from 'assets/bookmark.svg';
+import homeImg from 'assets/home.svg';
+import burgerImg from 'assets/burger.svg';
 import { StyledHeader, StyledHeaderInner, Logo, BurgerMenu } from './styled';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router';
 import { useEffect, useState } from 'react';
 
 const Header = () => {

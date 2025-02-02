@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Card from '../Card/Card';
+import Card from 'components/Card/Card';
 import {
   GalleryTitle,
   GalleryArts,
@@ -7,8 +7,8 @@ import {
   Pagination,
   PageButton,
 } from './styled';
-import arrowImg from '../../assets/arrow.svg';
-import { Artwork } from '../../constants/models/artModel';
+import arrowImg from 'assets/arrow.svg';
+import { Artwork } from 'constants/models/artModel';
 
 const pageCount = [1, 2, 3, 4];
 
