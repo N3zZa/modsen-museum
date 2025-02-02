@@ -1,7 +1,7 @@
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
-import { Artwork } from '../constants/models/artModel';
-import { OptionModel } from '../constants/models/OptionModel';
-import { options } from '../constants/options';
+import { Artwork } from 'constants/models/artModel';
+import { OptionModel } from 'constants/models/OptionModel';
+import { options } from 'constants/options';
 
 interface SortArtsContextType {
   sortedArts: Artwork[];
@@ -62,7 +62,7 @@ export const SortArtsProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     changeArts(sortedArts);
-  }, [selectedOption.value]);
+  }, [selectedOption.value, sortedArts[0]?.id]);
 
   return (
     <SortArtsContext.Provider

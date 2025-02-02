@@ -5,10 +5,10 @@ import {
   CardInfoInner,
   FavoriteButton,
 } from './styled';
-import logoImg from '../../assets/logo.svg';
-import { NavLink } from 'react-router-dom';
+import logoImg from 'assets/logo.svg';
+import { NavLink } from 'react-router';
 import { useContext } from 'react';
-import { FavoritesContext } from '../../context/FavoritesContext';
+import { FavoritesContext } from 'context/FavoritesContext';
 
 type CardProps = {
   title: string;

@@ -5,7 +5,7 @@ import React, {
   ReactNode,
   useEffect,
 } from 'react';
-import { Artwork } from '../constants/models/artModel';
+import { Artwork } from 'constants/models/artModel';
 
 interface FavoritesContextType {
   favorites: any[];

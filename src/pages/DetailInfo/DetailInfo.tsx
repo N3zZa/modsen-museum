@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import './DetailInfo.css';
-import logoImg from '../../assets/logo.svg';
-import { FavoritesContext } from '../../context/FavoritesContext';
+import logoImg from 'assets/logo.svg';
+import { FavoritesContext } from 'context/FavoritesContext';
 
 const DetailInfo = () => {
   const {
@@ -48,6 +48,8 @@ const DetailInfo = () => {
     const match = input.match(/\(([^,]+),|\n([^,]+)/);
     return match ? (match[1] || match[2]).trim() : null;
   };
+
+  
   const artistNationality = extractNationality(artist_display);
 
   useEffect(() => {

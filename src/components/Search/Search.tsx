@@ -1,13 +1,14 @@
 import Input from '../Input/Input';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { searchSchema } from '../../utils/zod';
+import { searchSchema } from 'utils/zod';
 import { z } from 'zod';
 import { useContext, useEffect, useState } from 'react';
-import MiniCard from '../MiniCard/MiniCard';
+import MiniCard from 'components/MiniCard/MiniCard';
 import { SearchMessage, Works } from './styled';
-import { Select } from '../Select/Select';
-import { SortArtsContext } from '../../context/SortArtsContext';
+import { Select } from 'components/Select/Select';
+import { SortArtsContext } from 'context/SortArtsContext';
+import { useDebounce } from 'utils/hooks/useDebounce';
 
 export type SearchFormValues = z.infer<typeof searchSchema>; // Автоматический тип формы
 
@@ -26,10 +27,15 @@ const Search: React.FC = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<SearchFormValues>({
     resolver: zodResolver(searchSchema),
+    mode: 'onChange',
   });
+
+  const searchValue = watch('query', '');
+  const debouncedSearch = useDebounce(searchValue, 750);
 
   const onSubmit = async (data: SearchFormValues) => {
     setLoading(true);
@@ -67,6 +73,12 @@ const Search: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (debouncedSearch.trim().length < 3) return;
+
+    onSubmit({ query: debouncedSearch });
+  }, [debouncedSearch]);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div
@@ -90,10 +102,10 @@ const Search: React.FC = () => {
         </SearchMessage>
       )}
 
-      {loading && <SearchMessage>Loading...</SearchMessage>}
+      {loading && <SearchMessage role="status">Loading...</SearchMessage>}
 
       {error && <SearchMessage style={{ color: 'red' }}>{error}</SearchMessage>}
-      <Works>
+      <Works role="minicardslist">
         {sortedArts.length > 0 &&
           sortedArts.map((art) => (
             <MiniCard

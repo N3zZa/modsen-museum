@@ -1,9 +1,7 @@
 import './Home.css';
-import Gallery from '../../components/Gallery/Gallery';
-import OtherWorks from '../../components/OtherWorks/OtherWorks';
-import Search from '../../components/Search/Search';
-import { Select } from '../../components/Select/Select';
-import { useState } from 'react';
+import Gallery from 'components/Gallery/Gallery';
+import OtherWorks from 'components/OtherWorks/OtherWorks';
+import Search from 'components/Search/Search';
 
 type Option = {
   label: string;

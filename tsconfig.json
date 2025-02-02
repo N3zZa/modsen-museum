@@ -1,5 +1,7 @@
 {
+  /* "extends": "./tsconfig.aliases.json", */
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es5",
     "allowJs": true,
     "skipLibCheck": true,
@@ -9,8 +11,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
   },
-  "include": ["src", "src/assets/declarations/declarations.d.ts"],  // Добавьте декларацию
+  "include": ["src", "src/assets/declarations/declarations.d.ts"],
   "exclude": ["node_modules"]
 }

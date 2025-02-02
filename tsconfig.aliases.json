@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",  // Указывает корневую директорию
+    "baseUrl": "src",
     "paths": {
-      "@components/*": ["components/*"],  // Алиас для компонентов
+      "@components/*": ["components/*"],
     }
   }
 }
