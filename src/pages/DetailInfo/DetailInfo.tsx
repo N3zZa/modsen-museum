@@ -49,7 +49,6 @@ const DetailInfo = () => {
     return match ? (match[1] || match[2]).trim() : null;
   };
 
-  
   const artistNationality = extractNationality(artist_display);
 
   useEffect(() => {

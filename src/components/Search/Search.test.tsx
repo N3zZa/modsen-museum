@@ -118,7 +118,7 @@ describe('Search component', () => {
         place_of_origin: 'Japan',
       },
     ]);
-    
+
     // Проверяем наличие мини-карт
     expect(screen.getByRole('minicardslist')).toBeInTheDocument();
   });

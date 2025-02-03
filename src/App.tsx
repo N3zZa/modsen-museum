@@ -12,7 +12,7 @@ function App() {
     <FavoritesProvider>
       <SortArtsProvider>
         <Router>
-          <Header/>
+          <Header />
           <div className="wrapper">
             <Routes>
               <Route path="/" element={<Home />} />
