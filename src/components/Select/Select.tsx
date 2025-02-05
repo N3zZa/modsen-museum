@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { SelectArea, SelectBlock, SelectItem, SelectOptions } from './styled';
+import { OptionModel } from 'types/OptionModel';
+
 import arrow from '../../assets/arrowBot.svg';
-import { SortArtsContext } from '../../context/SortArtsContext';
-import { OptionModel } from '../../constants/models/OptionModel';
 import { options } from '../../constants/options';
+import { SortArtsContext } from '../../context/SortArtsContext';
+import { SelectArea, SelectBlock, SelectItem, SelectOptions } from './styled';
 
 export const Select: React.FC = () => {
   const [showOptions, setShowOptions] = useState(false);
@@ -14,6 +15,11 @@ export const Select: React.FC = () => {
   }
 
   const { selectedOption, setSelectedOption } = context;
+
+  const handleClickOption = (option: OptionModel) => {
+    setSelectedOption(option);
+    setShowOptions(false);
+  };
 
   return (
     <SelectBlock>
@@ -31,12 +37,9 @@ export const Select: React.FC = () => {
       </SelectArea>
       {showOptions && (
         <SelectOptions>
-          {options.map((option) => (
+          {options.map((option: OptionModel) => (
             <SelectItem
-              onClick={() => {
-                setSelectedOption(option);
-                setShowOptions(false);
-              }}
+              onClick={() => handleClickOption(option)}
               key={option.value}>
               <span>{option.label}</span>
             </SelectItem>

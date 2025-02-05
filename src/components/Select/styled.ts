@@ -1,53 +1,51 @@
 import styled from 'styled-components';
+import { blocks } from 'styles/mixins';
 
 export const SelectBlock = styled.div`
   position: relative;
   max-width: 280px;
   span {
-    color: #757575;
+    color: ${({ theme }) => theme.colors.input} !important;
     font-weight: 400;
   }
 `;
 export const SelectArea = styled.div`
-  display: flex;
+  ${blocks.flexBetween}
   padding: 8px 16px;
   cursor: pointer;
-  justify-content: space-between;
-  align-items: center;
   background: #3939390d;
   border-radius: 10px;
 
   p {
     margin: 0;
-    font-size: 14px;
-    color: #757575;
+    font-size: ${({ theme }) => theme.size.small};
+    color: ${({ theme }) => theme.colors.input};
   }
   span {
-    font-size: 14px;
-    color: #757575;
+    font-size: ${({ theme }) => theme.size.small};
+    color: ${({ theme }) => theme.colors.input} !important;
     font-weight: bold;
   }
 `;
 export const SelectOptions = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${blocks.flexColumn}
   position: absolute;
   width: 100%;
   top: 55px;
-  border: 2px solid #757575;
+  border: 2px solid ${({ theme }) => theme.colors.input};
   border-radius: 10px;
   z-index: 5;
 `;
 
 export const SelectItem = styled.div`
-  background: rgb(240, 240, 240);
+  background: #f0f0f0;
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.size.small};
   cursor: pointer;
   border: 2px solid transparent;
 
   &:hover {
-    border-bottom: 2px solid #757575;
+    border-bottom: 2px solid ${({ theme }) => theme.colors.input};
     span {
       font-weight: bold;
     }

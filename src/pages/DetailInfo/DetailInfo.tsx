@@ -1,8 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
-import './DetailInfo.css';
 import logoImg from 'assets/logo.svg';
 import { FavoritesContext } from 'context/FavoritesContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
+import { extractNationality } from 'utils/extractNationality';
+
+import {
+  DetailInfoBlock,
+  DetailInfoImg,
+  DetailInfoInner,
+  DetailInfoStyled,
+  DetailLoader,
+  DetailOverview,
+  FavoriteButton,
+} from './styled';
 
 const DetailInfo = () => {
   const {
@@ -26,6 +36,7 @@ const DetailInfo = () => {
   }
 
   const { toggleFavorite, isFavorite } = context;
+
   const artWork = {
     id,
     title,
@@ -39,17 +50,19 @@ const DetailInfo = () => {
     place_of_origin,
   };
 
+  const artistNationality = extractNationality(artist_display);
+
+  const detailInfo = [
+    { label: 'Artist nationality', value: artistNationality || 'no info' },
+    { label: 'Dimensions', value: dimensions || 'no info' },
+    { label: 'Credit Line', value: credit_line || 'no info' },
+    { label: 'Repository', value: place_of_origin || 'no info' },
+  ];
+
   const onClickFavoriteBtn = (event: React.MouseEvent) => {
     event.preventDefault();
     toggleFavorite(artWork);
   };
-
-  const extractNationality = (input: string): string | null => {
-    const match = input.match(/\(([^,]+),|\n([^,]+)/);
-    return match ? (match[1] || match[2]).trim() : null;
-  };
-
-  const artistNationality = extractNationality(artist_display);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 800);
@@ -58,20 +71,17 @@ const DetailInfo = () => {
   return (
     <>
       {loading ? (
-        <h1 className="Detail_loader">Loading...</h1>
+        <DetailLoader>Loading...</DetailLoader>
       ) : (
-        <div className="DetailInfoBlock">
-          <div className="DetailInfoInner">
-            <div
+        <DetailInfoBlock>
+          <DetailInfoInner>
+            <DetailInfoImg
               style={{
                 background: `url(${image_url || logoImg})`,
                 backgroundSize: `${!!image_url ? 'cover' : '80px'}`,
                 border: `${!!image_url ? '' : '1px solid #E0A449'}`,
-              }}
-              className="DetailInfo_img">
-              <button
-                onClick={(e) => onClickFavoriteBtn(e)}
-                className="favoriteButton">
+              }}>
+              <FavoriteButton onClick={(e) => onClickFavoriteBtn(e)}>
                 <svg
                   width="24"
                   height="25"
@@ -86,36 +96,28 @@ const DetailInfo = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </button>
-            </div>
-            <div className="Detail_info">
-              <div className="Detail_title">
+              </FavoriteButton>
+            </DetailInfoImg>
+            <DetailInfoStyled>
+              <div>
                 <h2>{title}</h2>
                 <h3>{artist}</h3>
                 <p>{date_display}</p>
               </div>
-              <div className="Detail_overview">
+              <DetailOverview>
                 <h2>Overview</h2>
                 <ul>
-                  <li>
-                    <span>Artist nacionality</span>:{' '}
-                    {artistNationality || 'no info'}
-                  </li>
-                  <li>
-                    <span>Dimensions</span>: {dimensions || 'no info'}
-                  </li>
-                  <li>
-                    <span>Credit Line</span>: {credit_line || 'no info'}
-                  </li>
-                  <li>
-                    <span>Repository</span>: {place_of_origin || 'no info'}
-                  </li>
+                  {detailInfo.map((infoString) => (
+                    <li key={infoString.value}>
+                      <span>{infoString.label}</span>: {infoString.value}
+                    </li>
+                  ))}
                 </ul>
                 <p>Public</p>
-              </div>
-            </div>
-          </div>
-        </div>
+              </DetailOverview>
+            </DetailInfoStyled>
+          </DetailInfoInner>
+        </DetailInfoBlock>
       )}
     </>
   );

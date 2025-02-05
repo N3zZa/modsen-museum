@@ -7,8 +7,8 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Inter", serif;
-    background: #FAFAFA;
+    font-family: ${({ theme }) => theme.font.inter};
+    background: ${({ theme }) => theme.colors.white};
     padding-bottom: 100px;
   }
   a {
@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
   .wrapper {
     padding-bottom: 130px;
     max-width:1280px;
-    margin: 0 auto;
+    margin: ${({ theme }) => theme.spacing.xauto};
     width: 100%;
   }
   ul {

@@ -1,23 +1,19 @@
-import './Home.css';
 import Gallery from 'components/Gallery/Gallery';
 import OtherWorks from 'components/OtherWorks/OtherWorks';
 import Search from 'components/Search/Search';
 
-type Option = {
-  label: string;
-  value: string | number;
-};
+import { HomeStyled, HomeTitle } from './styled';
 
 const Home = () => {
   return (
-    <div className="Home">
-      <h1>
+    <HomeStyled>
+      <HomeTitle>
         let's find some <span>Art</span> here!
-      </h1>
+      </HomeTitle>
       <Search />
       <Gallery />
       <OtherWorks />
-    </div>
+    </HomeStyled>
   );
 };
 

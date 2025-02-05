@@ -1,34 +1,29 @@
 import styled from 'styled-components';
+import { blocks } from 'styles/mixins';
 
 export const StyledHeader = styled.header`
-  margin-bottom: 100px;
-  background: linear-gradient(
-    90deg,
-    #343333 38.05%,
-    #484848 69.22%,
-    #282828 98.98%
-  );
+  margin-bottom: ${({ theme }) => theme.spacing.large};
+  background: ${({ theme }) => theme.colors.header};
   width: 100%;
   height: 127px;
   display: flex;
   align-items: center;
 `;
+
 export const StyledHeaderInner = styled.div`
+  ${blocks.flexBetween}
   position: relative;
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  margin: ${({ theme }) => theme.spacing.xauto};
+  padding: 0 32px;
   width: 100%;
   height: 127px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   color: white;
 
   a {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 4px;
   }
 
   p {
@@ -40,9 +35,14 @@ export const StyledHeaderInner = styled.div`
   }
 `;
 
+export const HeaderNav = styled.nav`
+  display: flex;
+  gap: 16px;
+`;
+
 export const Logo = styled.div`
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
 
   p {
     margin: 0;
@@ -50,20 +50,19 @@ export const Logo = styled.div`
     margin-bottom: -3px;
   }
   span {
-    color: #e0a449;
+    color: ${({ theme }) => theme.colors.orange};
     font-weight: bold;
   }
 `;
 export const BurgerMenu = styled.nav`
-  display: flex;
-  flex-direction: column;
+  ${blocks.flexColumn}
   position: absolute;
-  right: 2rem;
-  top: 5rem;
-  gap: 0.25rem;
+  right: 32px;
+  top: 80px;
+  gap: 4px;
   background: #343333;
-  border: 1px solid rgb(67, 67, 67);
+  border: 1px solid #434343;
   border-radius: 10px;
-  padding: 0 1rem;
+  padding: 0 16px;
   z-index: 1;
 `;

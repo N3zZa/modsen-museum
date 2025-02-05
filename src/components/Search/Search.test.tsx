@@ -1,21 +1,26 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import Search from './Search'; // Путь к вашему компоненту
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { SortArtsContext } from 'context/SortArtsContext';
+import { ThemeProvider } from 'styled-components';
+import theme from 'styles/theme';
+
+import Search from './Search'; // Путь к вашему компоненту
 
 const mockSetSortedArts = jest.fn();
 const mockSetSelectedOption = jest.fn();
 
 const renderSearchComponent = () => {
   render(
-    <SortArtsContext.Provider
-      value={{
-        sortedArts: [],
-        setSortedArts: mockSetSortedArts,
-        selectedOption: { label: 'Date', value: 'date' },
-        setSelectedOption: mockSetSelectedOption,
-      }}>
-      <Search />
-    </SortArtsContext.Provider>
+    <ThemeProvider theme={theme}>
+      <SortArtsContext.Provider
+        value={{
+          sortedArts: [],
+          setSortedArts: mockSetSortedArts,
+          selectedOption: { label: 'Date', value: 'date' },
+          setSelectedOption: mockSetSelectedOption,
+        }}>
+        <Search />
+      </SortArtsContext.Provider>
+    </ThemeProvider>
   );
 };
 

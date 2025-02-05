@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Works, Loader } from './styled';
-import { useContext } from 'react';
-import { FavoritesContext } from 'context/FavoritesContext';
 import MiniCard from 'components/MiniCard/MiniCard';
+import { FavoritesContext } from 'context/FavoritesContext';
+import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
+
+import { Loader, Works } from './styled';
 
 const FavoritesList = () => {
   const context = useContext(FavoritesContext);

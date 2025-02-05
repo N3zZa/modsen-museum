@@ -1,14 +1,15 @@
-import Input from '../Input/Input';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { searchSchema } from 'utils/zod';
-import { z } from 'zod';
-import { useContext, useEffect, useState } from 'react';
 import MiniCard from 'components/MiniCard/MiniCard';
-import { SearchMessage, Works } from './styled';
 import { Select } from 'components/Select/Select';
 import { SortArtsContext } from 'context/SortArtsContext';
+import { useContext, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDebounce } from 'utils/hooks/useDebounce';
+import { searchSchema } from 'utils/zod';
+import { z } from 'zod';
+
+import Input from '../Input/Input';
+import { SearchMessage, Works } from './styled';
 
 export type SearchFormValues = z.infer<typeof searchSchema>; // Автоматический тип формы
 

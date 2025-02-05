@@ -1,3 +1,10 @@
+import logoImg from 'assets/logo.svg';
+import { routesPaths } from 'constants/routes';
+import { FavoritesContext } from 'context/FavoritesContext';
+import { useContext } from 'react';
+import { NavLink } from 'react-router';
+import { truncateText } from 'utils/truncateText';
+
 import {
   FavoriteButton,
   MiniCardBlock,
@@ -6,10 +13,6 @@ import {
   MiniCardInfoInner,
   MiniCardInner,
 } from './styled';
-import logoImg from 'assets/logo.svg';
-import { NavLink } from 'react-router';
-import { useContext } from 'react';
-import { FavoritesContext } from 'context/FavoritesContext';
 
 type MiniCardProps = {
   title: string;
@@ -22,10 +25,6 @@ type MiniCardProps = {
   date_display: string;
   dimensions: string;
   place_of_origin: string;
-};
-
-const truncateText = (str: string, len: number) => {
-  return str.slice(0, len) + '...';
 };
 
 const MiniCard = ({
@@ -53,7 +52,7 @@ const MiniCard = ({
   return (
     <NavLink
       role="minicard"
-      to={`/card/${id}`}
+      to={routesPaths.card + id}
       state={{ title, artist, image_url, image_urlMin, id, ...props }}>
       <MiniCardBlock>
         <MiniCardInner>

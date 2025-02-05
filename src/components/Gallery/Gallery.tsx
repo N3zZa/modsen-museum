@@ -1,70 +1,23 @@
-import { useEffect, useState } from 'react';
-import Card from 'components/Card/Card';
-import {
-  GalleryTitle,
-  GalleryArts,
-  Loader,
-  Pagination,
-  PageButton,
-} from './styled';
+import { fetchArtworks } from 'api/fetchGallery';
 import arrowImg from 'assets/arrow.svg';
-import { Artwork } from 'constants/models/artModel';
+import Card from 'components/Card/Card';
+import { pageCount } from 'constants/paginationPages';
+import { useEffect, useState } from 'react';
+import { Artwork } from 'types/artModel';
 
-const pageCount = [1, 2, 3, 4];
+import {
+  GalleryArts,
+  GalleryTitle,
+  Loader,
+  PageButton,
+  Pagination,
+} from './styled';
 
 const Gallery = () => {
-  const [artworks, setArtworks] = useState<Record<number, Artwork[]>>([]);
+  const [artworks, setArtworks] = useState<Record<number, Artwork[]>>({});
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
-  const fetchArtworks = async (page: number) => {
-    try {
-      if (artworks[page]) {
-        setLoading(false);
-        return;
-      }
-
-      setError(false);
-      setLoading(true);
-      fetch(
-        `https://api.artic.edu/api/v1/artworks?page=${page}&limit=3&fields=id,title,artist_title,image_id,date_display,artist_display,credit_line,dimensions,place_of_origin`
-      )
-        .then((response) => response.json())
-        .then((respData) => {
-          const data = respData.data;
-          const artworksWithImages = data.map((artwork: any) => ({
-            id: artwork.id,
-            title: artwork.title,
-            artist: artwork.artist_title || 'Unknown',
-            image_url: !!artwork.image_id
-              ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`
-              : null,
-            image_urlMin: !!artwork.image_id
-              ? `https://www.artic.edu/iiif/2/${artwork.image_id}/full/80,80/0/default.jpg`
-              : null,
-            artist_display: artwork.artist_display,
-            credit_line: artwork.credit_line,
-            date_display: artwork.date_display,
-            dimensions: artwork.dimensions,
-            place_of_origin: artwork.place_of_origin,
-          }));
-
-          setArtworks((prev) => ({ ...prev, [page]: artworksWithImages }));
-        })
-        .catch((error) => {
-          setError(true);
-          console.error('Ошибка при загруке артов: ', error);
-        })
-        .finally(() => {
-          setTimeout(() => {
-            setLoading(false);
-          }, 1000);
-        });
-    } catch (error) {
-      setError(true);
-    }
-  };
 
   const handlePageChange = (page: number) => {
     if (pageCount.length < page || page < 1) return;
@@ -72,7 +25,13 @@ const Gallery = () => {
   };
 
   useEffect(() => {
-    fetchArtworks(currentPage);
+    fetchArtworks({
+      page: currentPage,
+      setLoading,
+      setError,
+      setArtworks,
+      artworks,
+    });
   }, [currentPage]);
 
   return (

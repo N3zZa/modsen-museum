@@ -1,7 +1,8 @@
-import { InputStyled, InputBlock, SearchImg, InputInner } from './styled';
 import searchImg from 'assets/search.svg';
-import { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { SearchFormValues } from 'components/Search/Search';
+import { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+
+import { InputBlock, InputInner, InputStyled, SearchImg } from './styled';
 
 type InputSearchProps = {
   placeholder: string;

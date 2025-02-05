@@ -1,10 +1,11 @@
-import './Favorites.css';
 import FavoritesList from 'components/FavoritesList/FavoritesList';
+
+import { FavoritesTitle, FavoriteStyled } from './styled';
 
 const Favorites = () => {
   return (
-    <div className="FavoritePage">
-      <div className="Favorites_title">
+    <FavoriteStyled className="FavoritePage">
+      <FavoritesTitle className="Favorites_title">
         <h1>Here are your</h1>
         <div>
           <svg
@@ -24,9 +25,9 @@ const Favorites = () => {
 
           <h1>Favorites</h1>
         </div>
-      </div>
+      </FavoritesTitle>
       <FavoritesList />
-    </div>
+    </FavoriteStyled>
   );
 };
 

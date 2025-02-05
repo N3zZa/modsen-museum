@@ -1,7 +1,7 @@
-import React, { createContext, useState, ReactNode, useEffect } from 'react';
-import { Artwork } from 'constants/models/artModel';
-import { OptionModel } from 'constants/models/OptionModel';
 import { options } from 'constants/options';
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import { Artwork } from 'types/artModel';
+import { OptionModel } from 'types/OptionModel';
 
 interface SortArtsContextType {
   sortedArts: Artwork[];

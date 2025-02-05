@@ -1,11 +1,11 @@
 import React, {
   createContext,
-  useContext,
-  useState,
   ReactNode,
+  useContext,
   useEffect,
+  useState,
 } from 'react';
-import { Artwork } from 'constants/models/artModel';
+import { Artwork } from 'types/artModel';
 
 interface FavoritesContextType {
   favorites: any[];

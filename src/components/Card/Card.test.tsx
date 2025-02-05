@@ -1,13 +1,29 @@
-import { act } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import Card from './Card';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { FavoritesContext } from 'context/FavoritesContext';
+import { act } from 'react';
 import { BrowserRouter as Router } from 'react-router';
+import { ThemeProvider } from 'styled-components';
+import theme from 'styles/theme';
+
+import Card from './Card';
 
 // Мокаем контекст для тестов
 const mockToggleFavorite = jest.fn();
 const mockIsFavorite = jest.fn();
-const mockFavorites = [{ id: 1, title: 'Мона Лиза' }]; // Пример массива избранного
+const mockFavorites = [
+  {
+    title: 'Мона Лиза',
+    artist: 'Леонардо да Винчи',
+    image_url: 'image_url',
+    image_urlMin: 'image_urlMin',
+    id: 1,
+    artist_display: 'Display',
+    credit_line: 'Credit Line',
+    date_display: 'Date',
+    dimensions: 'Dimensions',
+    place_of_origin: 'Place',
+  },
+]; // Пример массива избранного
 
 const mockContext = {
   favorites: mockFavorites,
@@ -37,11 +53,13 @@ describe('Card', () => {
   test('Должен корректно рендерить компонент', async () => {
     await act(async () => {
       render(
-        <Router>
-          <FavoritesContext.Provider value={mockContext}>
-            <Card {...mockProps} />
-          </FavoritesContext.Provider>
-        </Router>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <FavoritesContext.Provider value={mockContext}>
+              <Card {...mockProps} />
+            </FavoritesContext.Provider>
+          </Router>
+        </ThemeProvider>
       );
     });
 
@@ -53,11 +71,13 @@ describe('Card', () => {
   test('Должен вызывать toggleFavorite при нажатии на кнопку избранного', async () => {
     await act(async () => {
       render(
-        <Router>
-          <FavoritesContext.Provider value={mockContext}>
-            <Card {...mockProps} />
-          </FavoritesContext.Provider>
-        </Router>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <FavoritesContext.Provider value={mockContext}>
+              <Card {...mockProps} />
+            </FavoritesContext.Provider>
+          </Router>
+        </ThemeProvider>
       );
     });
 
@@ -82,11 +102,13 @@ describe('Card', () => {
     mockIsFavorite.mockReturnValue(true); // Мокаем, что элемент в избранном
 
     render(
-      <Router>
-        <FavoritesContext.Provider value={mockContext}>
-          <Card {...mockProps} />
-        </FavoritesContext.Provider>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <FavoritesContext.Provider value={mockContext}>
+            <Card {...mockProps} />
+          </FavoritesContext.Provider>
+        </Router>
+      </ThemeProvider>
     );
 
     const favoriteButton = screen.getByRole('button'); // Кнопка избранного
@@ -100,11 +122,13 @@ describe('Card', () => {
     mockIsFavorite.mockReturnValue(false); // Мокаем, что элемент не в избранном
 
     render(
-      <Router>
-        <FavoritesContext.Provider value={mockContext}>
-          <Card {...mockProps} />
-        </FavoritesContext.Provider>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <FavoritesContext.Provider value={mockContext}>
+            <Card {...mockProps} />
+          </FavoritesContext.Provider>
+        </Router>
+      </ThemeProvider>
     );
 
     const favoriteButton = screen.getByRole('button');

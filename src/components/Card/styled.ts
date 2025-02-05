@@ -4,7 +4,7 @@ export const CardBlock = styled.div`
   display: flex;
   position: relative;
   height: 514px;
-  padding: 1rem 0;
+  padding: 16px 0;
   cursor: pointer;
   width: 100%;
   max-width: 387px;
@@ -16,6 +16,7 @@ export const CardBlock = styled.div`
     width: 100%;
     height: 100%;
     max-height: 444px;
+    max-width: 387px;
   }
 `;
 export const CardImage = styled.img`
@@ -26,6 +27,7 @@ export const CardImage = styled.img`
   width: 100%;
   height: 100%;
   max-height: 444px;
+  object-fit: cover;
 `;
 export const CardInfo = styled.div`
   display: flex;
@@ -35,7 +37,7 @@ export const CardInfo = styled.div`
   width: 100%;
   max-width: 285px;
   height: 85px;
-  padding: 24px;
+  padding: ${({ theme }) => theme.spacing.medium};
   padding-top: 30px;
   z-index: 1;
   background: #fff;
@@ -50,27 +52,27 @@ export const CardInfoInner = styled.div`
     font-weight: 400;
     line-height: 26.32px;
     letter-spacing: -0.01em;
-    color: #e0a449;
+    color: ${({ theme }) => theme.colors.orange};
   }
   h4:first-of-type {
     font-size: 17.54px;
     font-weight: 500;
     line-height: 26.32px;
     letter-spacing: -0.03em;
-    color: #393939;
+    color: ${({ theme }) => theme.colors.black};
   }
 `;
 
 export const FavoriteButton = styled.button`
   border: none;
   border-radius: 50%;
-  background: #f9f9f9;
-  padding: 17px;
+  background: ${({ theme }) => theme.colors.whiteBg};
+  padding: ${({ theme }) => theme.size.normal};
   cursor: pointer;
   width: 59px;
   height: 59px;
   z-index: 2;
   &:hover svg {
-    fill: #e0a449;
+    fill: ${({ theme }) => theme.colors.orange};
   }
 `;

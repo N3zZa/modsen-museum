@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { blocks } from 'styles/mixins';
 
 export const MiniCardBlock = styled.div`
   padding: 25px 13px;
@@ -12,44 +13,42 @@ export const MiniCardBlock = styled.div`
   }
 `;
 export const MiniCardInner = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  ${blocks.flexBetween}
 `;
 export const MiniCardImage = styled.img`
   width: 80px;
   height: 80px;
+  object-fit: cover;
 `;
 export const MiniCardInfo = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: ${({ theme }) => theme.spacing.normal};
   h4 {
     margin: 0;
   }
 `;
 export const MiniCardInfoInner = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${blocks.flexColumn}
   h4 {
-    font-family: Inter;
+    font-family: ${({ theme }) => theme.font.inter};
     font-size: 15.35px;
     font-weight: 400;
     line-height: 26.32px;
     letter-spacing: -0.01em;
-    color: #e0a449;
+    color: ${({ theme }) => theme.colors.orange};
   }
   h4:first-of-type {
     font-size: 17.54px;
     font-weight: 500;
     line-height: 26.32px;
     letter-spacing: -0.03em;
-    color: #393939;
+    color: ${({ theme }) => theme.colors.black};
   }
   p {
     margin: 0;
     margin-top: auto;
     margin-bottom: -5px;
-    font-family: Inter;
+    font-family: ${({ theme }) => theme.font.inter};
     font-size: 15.35px;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -59,12 +58,12 @@ export const MiniCardInfoInner = styled.div`
 export const FavoriteButton = styled.button`
   border: none;
   border-radius: 50%;
-  background: #f9f9f9;
-  padding: 17px;
+  background: ${({ theme }) => theme.colors.whiteBg};
+  padding: ${({ theme }) => theme.spacing.normal};
   cursor: pointer;
   width: 59px;
   height: 59px;
   &:hover svg {
-    fill: #e0a449;
+    fill: ${({ theme }) => theme.colors.orange};
   }
 `;

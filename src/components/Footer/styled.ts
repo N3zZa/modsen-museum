@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { blocks } from 'styles/mixins';
 
 export const StyledFooter = styled.footer`
   width: 100%;
@@ -13,20 +14,18 @@ export const StyledFooter = styled.footer`
   z-index: 10;
 `;
 export const StyledFooterInner = styled.div`
+  ${blocks.flexBetween}
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 32px;
   width: 100%;
   height: 127px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   color: white;
 
   div {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 4px;
   }
 
   p {
@@ -36,7 +35,7 @@ export const StyledFooterInner = styled.div`
 
 export const Logo = styled.div`
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
 
   p {
     margin: 0;
@@ -45,7 +44,7 @@ export const Logo = styled.div`
     color: black;
   }
   span {
-    color: #e0a449;
+    color: ${({ theme }) => theme.colors.orange};
     font-weight: bold;
   }
 `;

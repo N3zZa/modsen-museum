@@ -1,4 +1,4 @@
-import { OptionModel } from './models/OptionModel';
+import { OptionModel } from '../types/OptionModel';
 
 export const options: OptionModel[] = [
   { label: 'Date', value: 'date' },

@@ -10,7 +10,7 @@ export const InputInner = styled.div`
   display: flex;
   max-width: 762px;
   width: 95%;
-  margin: 0 1rem;
+  margin: 0 16px;
 `;
 
 export const InputStyled = styled.input`
@@ -18,13 +18,13 @@ export const InputStyled = styled.input`
   border-radius: 16px;
   border: none;
   outline: none;
-  padding: 24px 16px;
+  padding: ${({ theme }) => theme.spacing.input};
   width: 100%;
-  font-family: Inter, sans-serif;
+  font-family: ${({ theme }) => theme.font.inter};
 `;
 export const SearchImg = styled.img`
   position: absolute;
-  right: 16px;
+  right: ${({ theme }) => theme.spacing.normal};
   top: 25%;
   cursor: pointer;
 `;

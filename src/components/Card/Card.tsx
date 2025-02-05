@@ -1,3 +1,9 @@
+import logoImg from 'assets/logo.svg';
+import { routesPaths } from 'constants/routes';
+import { FavoritesContext } from 'context/FavoritesContext';
+import { useContext } from 'react';
+import { NavLink } from 'react-router';
+
 import {
   CardBlock,
   CardImage,
@@ -5,10 +11,6 @@ import {
   CardInfoInner,
   FavoriteButton,
 } from './styled';
-import logoImg from 'assets/logo.svg';
-import { NavLink } from 'react-router';
-import { useContext } from 'react';
-import { FavoritesContext } from 'context/FavoritesContext';
 
 type CardProps = {
   title: string;
@@ -45,8 +47,7 @@ const Card = ({ title, artist, image_url, id, ...props }: CardProps) => {
   return (
     <CardBlock>
       <NavLink
-        style={{ width: '100%', maxWidth: '387px' }}
-        to={`/card/${id}`}
+        to={routesPaths.card + id}
         state={{
           title,
           artist,

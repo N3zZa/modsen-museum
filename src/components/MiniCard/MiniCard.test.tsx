@@ -1,8 +1,11 @@
-import { act } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import MiniCard from './MiniCard';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { FavoritesContext } from 'context/FavoritesContext';
+import { act } from 'react';
 import { BrowserRouter as Router } from 'react-router';
+import { ThemeProvider } from 'styled-components';
+import theme from 'styles/theme';
+
+import MiniCard from './MiniCard';
 
 // Мокаем контекст для тестов
 const mockToggleFavorite = jest.fn();
@@ -50,11 +53,13 @@ describe('MiniCard', () => {
   test('Должен корректно рендерить компонент', async () => {
     await act(async () => {
       render(
-        <Router>
-          <FavoritesContext.Provider value={mockContext}>
-            <MiniCard {...mockProps} />
-          </FavoritesContext.Provider>
-        </Router>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <FavoritesContext.Provider value={mockContext}>
+              <MiniCard {...mockProps} />
+            </FavoritesContext.Provider>
+          </Router>
+        </ThemeProvider>
       );
     });
 
@@ -66,11 +71,13 @@ describe('MiniCard', () => {
   test('Должен вызывать toggleFavorite при нажатии на кнопку избранного', async () => {
     await act(async () => {
       render(
-        <Router>
-          <FavoritesContext.Provider value={mockContext}>
-            <MiniCard {...mockProps} />
-          </FavoritesContext.Provider>
-        </Router>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <FavoritesContext.Provider value={mockContext}>
+              <MiniCard {...mockProps} />
+            </FavoritesContext.Provider>
+          </Router>
+        </ThemeProvider>
       );
     });
 
@@ -95,11 +102,13 @@ describe('MiniCard', () => {
     mockIsFavorite.mockReturnValue(true); // Мокаем, что элемент в избранном
 
     render(
-      <Router>
-        <FavoritesContext.Provider value={mockContext}>
-          <MiniCard {...mockProps} />
-        </FavoritesContext.Provider>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <FavoritesContext.Provider value={mockContext}>
+            <MiniCard {...mockProps} />
+          </FavoritesContext.Provider>
+        </Router>
+      </ThemeProvider>
     );
 
     const favoriteButton = screen.getByRole('button'); // Кнопка избранного
@@ -113,11 +122,13 @@ describe('MiniCard', () => {
     mockIsFavorite.mockReturnValue(false); // Мокаем, что элемент не в избранном
 
     render(
-      <Router>
-        <FavoritesContext.Provider value={mockContext}>
-          <MiniCard {...mockProps} />
-        </FavoritesContext.Provider>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <FavoritesContext.Provider value={mockContext}>
+            <MiniCard {...mockProps} />
+          </FavoritesContext.Provider>
+        </Router>
+      </ThemeProvider>
     );
 
     const favoriteButton = screen.getByRole('button');
