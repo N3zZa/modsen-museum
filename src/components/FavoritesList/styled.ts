@@ -17,7 +17,7 @@ export const Works = styled.div`
     grid-template-columns: repeat(auto-fill, 400px);
   }
 `;
-export const Loader = styled.div`
+export const Message = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

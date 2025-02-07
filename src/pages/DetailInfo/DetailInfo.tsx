@@ -69,7 +69,7 @@ const DetailInfo = () => {
   }, []);
 
   return (
-    <>
+    <main>
       {loading ? (
         <DetailLoader>Loading...</DetailLoader>
       ) : (
@@ -119,7 +119,7 @@ const DetailInfo = () => {
           </DetailInfoInner>
         </DetailInfoBlock>
       )}
-    </>
+    </main>
   );
 };
 

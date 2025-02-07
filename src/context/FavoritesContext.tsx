@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { Artwork } from 'types/artModel';
+import { LocalStorageService } from 'utils/localStorage';
 
 interface FavoritesContextType {
   favorites: any[];
@@ -22,25 +23,25 @@ const FAVORITES_KEY = 'favoriteArtworks';
 export const FavoritesProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [favorites, setFavorites] = useState<Artwork[]>(() => {
-    const storedFavorites = localStorage.getItem(FAVORITES_KEY);
-    return storedFavorites ? JSON.parse(storedFavorites) : [];
-  });
+  const [favorites, setFavorites] = useState<string[]>(
+    () => LocalStorageService.getItem<string[]>(FAVORITES_KEY) || []
+  );
 
   useEffect(() => {
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    LocalStorageService.setItem(FAVORITES_KEY, favorites);
   }, [favorites]);
 
   const toggleFavorite = (art: Artwork) => {
     setFavorites((prev) =>
-      prev.find((artwork) => artwork.id === art.id)
-        ? prev.filter((artwork) => artwork.id !== art.id)
-        : [...prev, art]
+      prev.find((artworkId) => artworkId === art.id.toString())
+        ? prev.filter((artworkId) => artworkId !== art.id.toString())
+        : [...prev, art.id.toString()]
     );
   };
 
   const isFavorite = (artId: number) => {
-    if (favorites.find((artwork) => artwork.id === artId)) return true;
+    if (favorites.find((artworkId) => artworkId === artId.toString()))
+      return true;
     return false;
   };
 

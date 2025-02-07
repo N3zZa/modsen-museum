@@ -11,6 +11,7 @@ import {
   Loader,
   PageButton,
   Pagination,
+  GalleryBlock,
 } from './styled';
 
 const Gallery = () => {
@@ -35,7 +36,7 @@ const Gallery = () => {
   }, [currentPage]);
 
   return (
-    <div style={{ marginTop: '125px', padding: '0 0.75rem' }}>
+    <GalleryBlock>
       <GalleryTitle>
         <h4>Topics for you</h4>
         <h2>Our special gallery</h2>
@@ -88,7 +89,7 @@ const Gallery = () => {
           alt="->"
         />
       </Pagination>
-    </div>
+    </GalleryBlock>
   );
 };
 

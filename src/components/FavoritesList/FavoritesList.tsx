@@ -3,9 +3,12 @@ import { FavoritesContext } from 'context/FavoritesContext';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 
-import { Loader, Works } from './styled';
+import { Message, Works } from './styled';
+import { fetchFavorites } from 'api/fetchFavorites';
+import { Artwork } from 'types/artModel';
 
 const FavoritesList = () => {
+  const [artworks, setArtworks] = useState<Artwork[]>([]);
   const context = useContext(FavoritesContext);
 
   if (!context) {
@@ -14,23 +17,30 @@ const FavoritesList = () => {
 
   const { favorites } = context;
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false));
+    fetchFavorites({ favorites, setArtworks, setLoading, setError });
   }, []);
 
   return (
     <div style={{ marginTop: '125px', padding: '0 0.75rem' }}>
       <div>
         <Works>
-          {loading ? (
-            <Loader>
+          {loading && (
+            <Message>
               <h2>Loading...</h2>
-            </Loader>
-          ) : (
+            </Message>
+          )}
+          {error && (
+            <Message>
+              <h2>Error receiving your favorites</h2>
+            </Message>
+          )}
+          {loading || error || (
             <>
-              {favorites.length !== 0 ? (
-                favorites?.map((art) => (
+              {artworks.length !== 0 ? (
+                artworks?.map((art) => (
                   <MiniCard
                     key={art.id}
                     id={art.id}

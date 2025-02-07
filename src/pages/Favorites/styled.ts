@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { blocks } from 'styles/mixins';
 
-export const FavoriteStyled = styled.div`
+export const FavoriteStyled = styled.main`
   color: ${({ theme }) => theme.colors.black};
   font-family: ${({ theme }) => theme.font.lexend};
 `;
