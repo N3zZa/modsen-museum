@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { blocks, BlockTitle } from 'styles/mixins';
 
-
 export const GalleryBlock = styled.section`
   margin-top: 125px;
   padding: 0 12px;

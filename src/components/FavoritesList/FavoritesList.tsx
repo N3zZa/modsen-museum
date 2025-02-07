@@ -1,11 +1,11 @@
+import { fetchFavorites } from 'api/fetchFavorites';
 import MiniCard from 'components/MiniCard/MiniCard';
 import { FavoritesContext } from 'context/FavoritesContext';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
+import { Artwork } from 'types/artModel';
 
 import { Message, Works } from './styled';
-import { fetchFavorites } from 'api/fetchFavorites';
-import { Artwork } from 'types/artModel';
 
 const FavoritesList = () => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);

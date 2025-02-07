@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { fetchSearchWorks, fetchSearchWorksParams } from 'api/fetchSearchWorks';
 import MiniCard from 'components/MiniCard/MiniCard';
 import { Select } from 'components/Select/Select';
 import { SortArtsContext } from 'context/SortArtsContext';
@@ -10,7 +11,6 @@ import { z } from 'zod';
 
 import Input from '../Input/Input';
 import { SearchMessage, Works } from './styled';
-import { fetchSearchWorks, fetchSearchWorksParams } from 'api/fetchSearchWorks';
 
 export type SearchFormValues = z.infer<typeof searchSchema>; // Автоматический тип формы
 

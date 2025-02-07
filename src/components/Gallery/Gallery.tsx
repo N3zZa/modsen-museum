@@ -7,11 +7,11 @@ import { Artwork } from 'types/artModel';
 
 import {
   GalleryArts,
+  GalleryBlock,
   GalleryTitle,
   Loader,
   PageButton,
   Pagination,
-  GalleryBlock,
 } from './styled';
 
 const Gallery = () => {
