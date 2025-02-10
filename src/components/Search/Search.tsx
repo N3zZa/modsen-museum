@@ -53,7 +53,6 @@ const Search: React.FC = () => {
 
     onSubmit({ query: debouncedSearch });
   }, [debouncedSearch]);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div

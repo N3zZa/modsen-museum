@@ -1,11 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import Card from 'components/Card/Card';
 import { FavoritesContext } from 'context/FavoritesContext';
 import { act } from 'react';
 import { BrowserRouter as Router } from 'react-router';
 import { ThemeProvider } from 'styled-components';
 import theme from 'styles/theme';
-
-import MiniCard from './MiniCard';
 
 // Мокаем контекст для тестов
 const mockToggleFavorite = jest.fn();
@@ -44,7 +43,7 @@ const mockProps = {
   place_of_origin: 'Place',
 };
 
-describe('MiniCard', () => {
+describe('Card', () => {
   beforeEach(() => {
     mockToggleFavorite.mockClear();
     mockIsFavorite.mockClear();
@@ -56,7 +55,7 @@ describe('MiniCard', () => {
         <ThemeProvider theme={theme}>
           <Router>
             <FavoritesContext.Provider value={mockContext}>
-              <MiniCard {...mockProps} />
+              <Card {...mockProps} />
             </FavoritesContext.Provider>
           </Router>
         </ThemeProvider>
@@ -65,7 +64,7 @@ describe('MiniCard', () => {
 
     // Проверяем наличие элементов
     expect(screen.getByText('Мона Лиза')).toBeInTheDocument();
-    expect(screen.getByText('Леонардо да В...')).toBeInTheDocument();
+    expect(screen.getByText('Леонардо да Вин...')).toBeInTheDocument();
   });
 
   test('Должен вызывать toggleFavorite при нажатии на кнопку избранного', async () => {
@@ -74,7 +73,7 @@ describe('MiniCard', () => {
         <ThemeProvider theme={theme}>
           <Router>
             <FavoritesContext.Provider value={mockContext}>
-              <MiniCard {...mockProps} />
+              <Card {...mockProps} />
             </FavoritesContext.Provider>
           </Router>
         </ThemeProvider>
@@ -105,7 +104,7 @@ describe('MiniCard', () => {
       <ThemeProvider theme={theme}>
         <Router>
           <FavoritesContext.Provider value={mockContext}>
-            <MiniCard {...mockProps} />
+            <Card {...mockProps} />
           </FavoritesContext.Provider>
         </Router>
       </ThemeProvider>
@@ -125,7 +124,7 @@ describe('MiniCard', () => {
       <ThemeProvider theme={theme}>
         <Router>
           <FavoritesContext.Provider value={mockContext}>
-            <MiniCard {...mockProps} />
+            <Card {...mockProps} />
           </FavoritesContext.Provider>
         </Router>
       </ThemeProvider>

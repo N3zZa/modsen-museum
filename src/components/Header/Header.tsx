@@ -3,7 +3,7 @@ import burgerImg from 'assets/burger.svg';
 import homeImg from 'assets/home.svg';
 import logoImg from 'assets/logo.svg';
 import { routesPaths } from 'constants/routes';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router';
 
 import {
@@ -18,6 +18,7 @@ const Header = () => {
   const { pathname } = useLocation();
   const [burgerMenu, openBurgerMenu] = useState<boolean>(false);
   const screenWidth = window.screen.width;
+  const burgerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (burgerMenu) {
@@ -26,6 +27,22 @@ const Header = () => {
       document.body.style.overflow = 'auto';
     }
   }, [burgerMenu]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        burgerRef.current &&
+        !burgerRef.current.contains(event.target as Node)
+      ) {
+        openBurgerMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <StyledHeader>
@@ -56,7 +73,7 @@ const Header = () => {
               <img width={30} src={burgerImg} alt="menu" />
             </button>
             {burgerMenu && (
-              <BurgerMenu>
+              <BurgerMenu ref={burgerRef}>
                 {pathname !== '/' && (
                   <NavLink
                     onClick={() => openBurgerMenu(false)}
